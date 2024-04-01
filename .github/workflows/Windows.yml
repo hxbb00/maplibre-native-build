@@ -26,14 +26,9 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0
-
-      - name: Setup submodules
-        shell: bash
-        run: |
-          auth_header="$(git config --local --get http.https://github.com/.extraheader)"
-          git submodule sync --recursive
-          git -c "http.extraheader=$auth_header" -c protocol.version=2 submodule update --init --force --recursive --depth=1 || true
+          repository: hxbb00/maplibre-native
+          submodules: "recursive"
+          path: "maplibre-native"
 
       - name: Setup ninja
         uses: seanmiddleditch/gha-setup-ninja@v4
@@ -61,7 +56,7 @@ jobs:
           COMPILER_TYPE: ${{ matrix.compiler }}
         run: |
           mkdir build && cd build
-          cmake.exe ../vendor/maplibre-native/ \
+          cmake.exe ../maplibre-native/ \
             -G"Ninja Multi-Config" \
             -DCMAKE_CONFIGURATION_TYPES="Release;Debug" \
             -DCMAKE_C_COMPILER_LAUNCHER="ccache.exe" \
