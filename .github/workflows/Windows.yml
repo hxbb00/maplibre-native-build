@@ -18,9 +18,8 @@ jobs:
     strategy:
       matrix:
         include:
-          - arch: msvc2019_64
+          - arch: msvc2022_64
             compiler: x64
-            compiler_version: 14.29
 
     steps:
       - name: git configure long path
@@ -40,7 +39,6 @@ jobs:
         uses: ilammy/msvc-dev-cmd@v1
         with:
           arch: ${{ matrix.compiler }}
-          toolset: ${{ matrix.compiler_version }}
 
       - name: Update ccache
         run: |
