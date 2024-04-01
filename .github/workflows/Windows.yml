@@ -23,12 +23,15 @@ jobs:
             compiler_version: 14.29
 
     steps:
+      - name: git configure long path
+        run: git config --global core.longpaths true
+
       - name: Checkout
         uses: actions/checkout@v4
         with:
           repository: hxbb00/maplibre-native
-          submodules: "recursive"
-          path: "maplibre-native"
+          submodules: recursive
+          path: maplibre-native
 
       - name: Setup ninja
         uses: seanmiddleditch/gha-setup-ninja@v4
