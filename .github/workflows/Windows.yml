@@ -61,12 +61,12 @@ jobs:
           COMPILER_TYPE: ${{ matrix.compiler }}
         run: |
           mkdir build && cd build
-          cmake.exe ./vendor/maplibre-native/ \
+          cmake.exe ../vendor/maplibre-native/ \
             -G"Ninja Multi-Config" \
             -DCMAKE_CONFIGURATION_TYPES="Release;Debug" \
             -DCMAKE_C_COMPILER_LAUNCHER="ccache.exe" \
             -DCMAKE_CXX_COMPILER_LAUNCHER="ccache.exe" \
-            -DCMAKE_INSTALL_PREFIX="./install"
+            -DCMAKE_INSTALL_PREFIX="../install"
           ninja.exe
           ninja.exe install
 
