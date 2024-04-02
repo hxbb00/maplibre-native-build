@@ -64,26 +64,13 @@ jobs:
             -DCMAKE_CXX_COMPILER_LAUNCHER="ccache.exe" \
             -DCMAKE_INSTALL_PREFIX="../install"
           ninja.exe
-          ninja.exe install
 
-      - name: Compress installation
-        shell: bash
-        env:
-          TAG_ARCH: ${{ matrix.arch }}
-        run: |
-          pushd install
-          tar cjvf ../MapLibre_Windows_${TAG_ARCH}.tar.bz2 *
-          popd
-
-      - name: Upload installation
+      - name: Upload sdk
         uses: actions/upload-artifact@v4
         with:
           name: MapLibre_Windows_${{ matrix.arch }}
-          path: MapLibre_Windows_${{ matrix.arch }}.tar.bz2
-
-      - name: Release
-        uses: ncipollo/release-action@v1
-        with:
-          artifacts: MapLibre_Windows_${{ matrix.arch }}.tar.bz2
-          allowUpdates: true
-          draft: true
+          path: |
+            include
+            build/**/*.lib
+            build/CMakeFiles/**/*.pdb
+            Z:/installed/x64-windows
