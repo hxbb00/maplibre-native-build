@@ -1,4 +1,4 @@
-name: Windows_CI
+name: Windows_With_OSMesa
 
 on:
   workflow_dispatch:
@@ -62,6 +62,7 @@ jobs:
             -DCMAKE_CONFIGURATION_TYPES="Release;Debug" \
             -DCMAKE_C_COMPILER_LAUNCHER="ccache.exe" \
             -DCMAKE_CXX_COMPILER_LAUNCHER="ccache.exe" \
+            -DMLN_WITH_OSMESA=ON \
             -DCMAKE_INSTALL_PREFIX="../install"
           ninja.exe
 
@@ -74,4 +75,5 @@ jobs:
             build/CMakeFiles/**/*.pdb
             maplibre-native/include/
             maplibre-native/platform/windows/vendor/vcpkg/installed/x64-windows/
+            maplibre-native/platform/windows/vendor/mesa3d/
             maplibre-native/vendor/**/include/
